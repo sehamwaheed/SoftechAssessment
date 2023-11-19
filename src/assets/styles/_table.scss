@@ -1,0 +1,106 @@
+
+.wrappe {
+    // width: 74vw;
+    height: 80vh;
+    overflow-x: auto;
+    overflow-y: auto;
+    padding-inline-end: 5px;
+  
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+  
+    &::-webkit-scrollbar:horizontal {
+      height: 8px;
+    }
+  
+    &::-webkit-scrollbar-track {
+      background:  #f1f1f1;
+      border-radius: 5px;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background: lightgray;
+      border-radius: 5px;
+    }
+    .table {
+      vertical-align: middle;
+    }
+  
+    .table th {
+      border-bottom: 0;
+      padding: 1.5ex;
+      text-align: center;
+    }
+  
+    td {
+      padding: 1.5ex;
+      text-align: center;
+    }
+  
+    .table th:first-child,
+    .table th:nth-child(2),
+    .table td:first-child,
+    .table td:nth-child(2) {
+      width: 20px;
+    }
+  
+    th.name_col,
+    td.name_col {
+      text-align: left;
+    }
+  
+    thead  {
+      position: sticky;
+      top: -1px;
+      /* Don't forget this, required for the stickiness */
+      box-shadow: 0 2px 2px -1px #e2effdb7;
+      background-color: #e2f0fd ;
+      border: 0;
+      z-index: 9;
+      border-bottom: 1px solid #e2effd;
+      th{
+        background-color: #e2f0fd ;
+      }
+    }
+    .table>:not(:first-child) {
+      border-top: 0px solid currentColor;
+    }
+    .btn-icons {
+        border-radius: 8px;
+        width: 35px;
+        height: 35px;
+        border: 0;
+        background:#d1e5fe;
+        transition: 0.3s ease-in-out;
+    
+        &:hover {
+          background-color: rgba(238, 238, 238, 0.616);
+        }
+    
+        &:focus {
+          background-color: rgba(238, 238, 238, 0.507);
+          box-shadow: 0 0 10px rgb(243, 231, 231);
+        }
+    
+      
+  
+    }
+ 
+  }
+  
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .wrappe {
+ 
+      overflow-x: auto;
+    }
+
+  }
+  
+  /* small*/
+  @media (max-width: 767px) {
+    .wrappe {
+  
+      overflow: auto;
+    }
+  }

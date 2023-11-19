@@ -1,0 +1,64 @@
+<ng-container *ngIf="orders$ | async">
+    <div class="m-4">
+      <div class="card  shadow">
+        
+            <div class="card-body">
+              <div class="wrappe">
+                <table class="table position-relative text-nowrap">
+                  <thead>
+                    <tr>
+                      <th >Order</th>
+                      <th >Name</th>
+                      <th >Order Date</th>
+                      <th >Payment Method</th>
+                      <th >Total Price</th>
+                      <th></th>
+                    
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let item of ordersList; let i = index">
+                      <tr  *ngIf="(item.UserId | getUser:users) as User">
+                        <td>{{ item.OrderId }}</td>
+                        <td>{{ User.Name}}</td>
+                        <td>
+                          {{ item.OrderDate | date :'dd/MM/yyyy'}}
+                        </td>
+                        <td>
+                          <span
+                            class="badge"
+                            [ngClass]="
+                              item.PaymentType == 'online' ||
+                              item.PaymentType == 'Online'
+                                ? 'bg-success'
+                                : 'bg-danger'
+                            "
+                          >
+                            {{ item.PaymentType }}</span
+                          >
+                        </td>
+                        <td>{{item.Products | calculateTotalPriceOfProduct: products | currency:'EGP'}}</td>
+                        <td>
+                          <button
+                          type="button"
+                          class="btn-icons text-primary"
+                          data-bs-toggle="modal"
+                          data-bs-target="#editQuantity"
+                          (click)="orderDetails(item)"
+                        >
+                        <i class="fas fa-eye"></i>
+                        </button>
+                           </td>
+                      
+                    </tr>
+                    </ng-container>
+                    
+                
+                  </tbody>
+                </table>
+            </div>
+            </div>
+            </div>
+            </div>
+   
+</ng-container>

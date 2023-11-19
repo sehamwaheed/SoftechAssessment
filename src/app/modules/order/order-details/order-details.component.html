@@ -1,0 +1,107 @@
+<ng-container *ngIf="otherData$ |async"></ng-container>
+<ng-container *ngIf="order$ |async as Order">
+
+  <div class="container-fluid py-lg-3 px-lg-5 py-sm-2">
+<div class=" d-flex justify-content-between">
+<div>
+  <h3 class=" ">Order #{{Order.OrderId}}     
+    <span class="badge" 
+    class="badge"
+    [ngClass]="
+      Order.PaymentType == 'online' ||
+      Order.PaymentType == 'Online'
+        ? 'bg-success'
+        : 'bg-danger'
+    "
+    >{{Order.PaymentType}}</span></h3>
+  <div class=" gap-5">
+    <span class="text-secondary">{{Order.OrderDate |date: 'long'}} </span>
+  </div>
+</div>
+<div>
+  <button type="button" class="btn btn-outline-secondary" (click)=" backOrder()">back</button>
+</div>
+</div>
+    <div class="row my-3">
+      <div class="col-lg-3 col-md-12 col-sm-12">
+        <div class="card text-center shadow border-0 shadow-lg p-3 mb-5 bg-body rounded">
+          <ng-container *ngIf="(Order.UserId | getUser: users) as User">  
+            <div class="card-body">
+              <div class="d-flex justify-content-center">
+                <img
+                  src="../../../../assets/images/placeholder.jpg"
+                  alt="Admin"
+                  class="rounded-circle"
+                  width="140"
+                />
+              </div>
+              <h4 class="my-2">{{User.Name}}</h4>
+              <span class="text-secondary"
+                >{{User.Address}}</span
+              >
+              <ul class="list-group list-group-flush">
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                >
+                  <h6 class="mb-0">Phone</h6>
+                  <span class="text-secondary">{{User.Phone}}</span>
+                </li>
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center"
+                >
+                  <h6 class="mb-0">Email</h6>
+                  <span class="text-secondary">{{User.Email}}</span>
+                </li>
+              </ul>
+            </div>
+          </ng-container>
+          
+        </div>
+      </div>
+      <div class="col-lg-9 col-md-12 col-sm-12">
+        <div class="table-responsive custom-table-responsive shadow-lg p-3 mb-5 bg-body rounded">
+          <table class="table custom-table">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Proudct</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let product of Order.Products; let i=index">
+
+                <tr scope="row">
+                  <th scope="row">
+                 
+                  </th>
+                  <td>{{product.product?.ProductName}}</td>
+                  <td>{{product.product?.ProductPrice}}</td>
+                  <td>
+                    {{product.Quantity}} 
+                  </td>
+                  <td>{{product.totalPrice | currency:'EGP'}}</td>
+                </tr>
+                <tr class="spacer" *ngIf="Order.Products.length -1 != i">
+                  <td colspan="100"></td>
+                </tr>
+              </ng-container>
+              
+           
+            </tbody>
+          </table>
+          <div class="card  border-start-0 border-end-0 rounded-0">
+            <div class="card-body">
+              <div class="d-flex gap-3">
+                <h5>Total Price :</h5>
+                <h5>{{Order.Products | getTotalPriceAllProducts | currency:'EGP'}}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

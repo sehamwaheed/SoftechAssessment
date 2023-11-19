@@ -1,0 +1,109 @@
+<ng-container *ngIf="products$ | async"></ng-container>
+
+<div class="m-4">
+  <div class="card shadow">
+    <div class="card-body">
+      <div class="wrappe">
+        <table class="table position-relative text-nowrap">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Product Name</th>
+              <th class="text-center">Product Price</th>
+              <th>Available Pieces</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of productsList; let i = index">
+              <td></td>
+              <td>{{ product.ProductName }}</td>
+              <td class="text-center">
+                {{ product.ProductPrice | currency : "EGP" }}
+              </td>
+              <td>
+                <span
+                  class="badge"
+                  [ngClass]="{
+                    'text-bg-warning':
+                      product.AvailablePieces <= 10 &&
+                      product.AvailablePieces != 0,
+                    'text-bg-danger': product.AvailablePieces == 0,
+                    'text-bg-success': product.AvailablePieces > 10
+                  }"
+                >
+                  <span>Available Pieces: </span>
+                  <span>{{ product.AvailablePieces }}</span>
+                </span>
+              </td>
+              <td>
+                <button
+                  type="button"
+                  class="btn-icons text-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editQuantity"
+                  (click)="selectProduct(i)"
+                >
+                  <i class="fas fa-pen"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="editQuantity"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Available Pieces
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="quantity" class="form-label">Enter New Quantity</label>
+          <input
+            type="number"
+            inputmode="numeric"
+            min="0"
+            [formControl]="productForm"
+            class="form-control"
+            id="quantity"
+            placeholder="3"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          (click)="submit($event)"
+        >
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

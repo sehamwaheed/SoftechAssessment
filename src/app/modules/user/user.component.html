@@ -1,0 +1,68 @@
+<!-- <section class="container-fluid mt-2 shadow-lg p-3 mb-5 bg-body rounded">
+ 
+
+   <div class="table-responsive custom-table-responsive">
+      <table class="table custom-table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Address</th>
+            <th scope="col">RegisterDate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users$ | async as UsersData; let i = index">
+            <td>{{ user.Name }}</td>
+            <td>{{ user.Email }}</td>
+            <td>{{ user.Phone }}</td>
+            <td>
+              >
+              {{ user.Address }}
+            </td>
+            <td>{{ user.RegisterDate | date : "dd/MM/yyyy" }}</td>
+          </tr> 
+        </tbody>
+      </table>
+    </div> 
+  
+   
+  
+</section> -->
+<div class="m-4">
+  <div class="card  shadow">
+      <div class="card-header bg-body border-0">
+        <h3 class="my-2">All Users</h3>
+
+      </div>
+        <div class="card-body">
+          <div class="wrappe">
+            <table class="table position-relative text-nowrap">
+              <thead>
+                <tr>
+               
+                  <th>Name</th>
+                  <th class="name_col" >Email</th>
+                  <th >Phone</th>
+                  <th >Address</th>
+                  <th>RegisterDate</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of users$ | async as UsersData; let i = index">
+                    <td>{{ user.Name }}</td>
+                    <td>{{ user.Email }}</td>
+                    <td>{{ user.Phone }}</td>
+                    <td>
+                      >
+                      {{ user.Address }}
+                    </td>
+                    <td>{{ user.RegisterDate | date : "dd/MM/yyyy" }}</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+        </div>
+        </div>
+        </div>
